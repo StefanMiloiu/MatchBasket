@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'ro.mpp2024'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application{
+    mainClass = 'ro.mpp2024.StartRcpServer'
+}
+
+dependencies {
+    implementation project(path: ':MatchModule')
+    implementation project(path: ':MatchPersistance')
+    implementation project(path: ':MatchNetworking')
+    implementation project(path: ':MatchServices')
+    implementation project(path: ':MatchClientFX')
+
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:9.4.0.jre11'
+
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

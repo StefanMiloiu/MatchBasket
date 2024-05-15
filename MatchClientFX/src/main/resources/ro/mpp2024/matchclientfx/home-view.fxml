@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ro.mpp2024.matchclientfx.gui.HomeViewController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TableView fx:id="table" layoutX="20" layoutY="20" prefHeight="360.0" prefWidth="560.0">
+        <columns>
+            <TableColumn fx:id="column1" prefWidth="186.0" text="Match" />
+            <TableColumn fx:id="column2" prefWidth="186.0" text="Price" />
+            <TableColumn fx:id="column3" prefWidth="186.0" text="Seats available" />
+        </columns>
+    </TableView>
+
+    <VBox layoutX="600" layoutY="20" spacing="10.0">
+        <Label layoutX="600" layoutY="20" text="Nume Client:" />
+        <TextField fx:id="clientName" layoutX="600" layoutY="50" prefWidth="200" />
+        <Label layoutX="600" layoutY="20" text="Numar de tickete: " />
+        <TextField fx:id="nrOfTickets" layoutX="600" layoutY="50" prefWidth="200" />
+        <Button fx:id="sellButton" layoutX="600" layoutY="80" text="Vanzare" onAction="#handleSellButtonAction"/>
+        <Button fx:id="filtreaza" layoutX="600" layoutY="110" text="Cautare" onAction="#handleCautareButtonAction"/>
+        <Button fx:id="scoateFiltru" layoutX="600" layoutY="140" text="Unfilter" onAction="#handleUnfiltreButtonAction"/>
+        <Button fx:id="logoutButton" layoutX="600" layoutY="170" text="Logout" onAction="#handleLogoutButtonAction"/>
+    </VBox>
+
+
+</AnchorPane>

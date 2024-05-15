@@ -1,0 +1,8 @@
+rootProject.name = 'MatchBasket'
+include 'MatchModule'
+include 'MatchPersistance'
+include 'MatchServices'
+include 'MatchServer'
+include 'MatchNetworking'
+include 'MatchClientFX'
+
