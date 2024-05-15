@@ -188,7 +188,7 @@ public class MatchServicesRpcProxy implements IMatchServices {
     }
 
     @Override
-    public Iterable<Match> findAllWithAvailableSeats() {
+    public Iterable<HibernateMatch> findAllWithAvailableSeats() {
         Request request = new Request.Builder().type(RequestType.FIND_ALL_WITH_AVAILABLE_SEATS).build();
         sendRequest(request);
         Response response = null;
@@ -196,7 +196,7 @@ public class MatchServicesRpcProxy implements IMatchServices {
         if (response.type() == ResponseType.ERROR) {
             return Collections.emptyList();
         }
-        return (Iterable<Match>) response.data();
+        return (Iterable<HibernateMatch>) response.data();
     }
 
     @Override
@@ -239,7 +239,7 @@ public class MatchServicesRpcProxy implements IMatchServices {
     }
 
     @Override
-    public Iterable<Match> findAll() {
+    public Iterable<HibernateMatch> findAll() {
         Request request = new Request.Builder().type(RequestType.FIND_ALL).build();
         sendRequest(request);
         Response response = null;
@@ -247,7 +247,7 @@ public class MatchServicesRpcProxy implements IMatchServices {
         if (response.type() == ResponseType.ERROR) {
             return Collections.emptyList();
         }
-        return (Iterable<Match>) response.data();
+        return (Iterable<HibernateMatch>) response.data();
     }
 
     @Override

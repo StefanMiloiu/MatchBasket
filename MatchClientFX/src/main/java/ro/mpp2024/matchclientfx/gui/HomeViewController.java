@@ -431,8 +431,20 @@ public class HomeViewController implements IMatchObserver {
     }
 
     @Override
-    public void updateTicket(Ticket tickets) throws MatchException {
-        // Refresh the table when a ticket is updated
+public void updateTicket(Ticket tickets) throws MatchException {
+    // Run on the JavaFX Application Thread
+    Platform.runLater(() -> {
+        // Find the match in the table that corresponds to the updated ticket
+        for (DTOMatch match : table.getItems()) {
+            if (match.getMatch().getId().equals(tickets.getMatchId())) {
+                // Update the properties of the match
+                match.setPrice(tickets.getPrice());
+                match.setSeatsAvailable(tickets.getAvailableSeats());
+                break;
+            }
+        }
+        // Refresh the table to reflect the changes
         table.refresh();
-    }
+    });
+}
 }

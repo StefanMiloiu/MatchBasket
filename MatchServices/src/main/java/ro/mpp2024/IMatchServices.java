@@ -13,9 +13,9 @@ public interface IMatchServices {
 
     public void addClientTicket(Long ticketId, Long clientId) throws SQLException;
 
-    public Iterable<Match> findAllWithAvailableSeats();
+    public Iterable<HibernateMatch> findAllWithAvailableSeats();
 
-    public Iterable<Match> findAll();
+    public Iterable<HibernateMatch> findAll();
 
     public Optional<Ticket> findOneTicketByMatch(Long matchId);
 

@@ -1,13 +1,10 @@
 package ro.mpp2024;
 
-import ro.mpp2024.Repository.*;
 import ro.mpp2024.utils.AbstractServer;
 import ro.mpp2024.utils.MatchRpcConcurrentServer;
 
 
 import java.io.IOException;
-import java.rmi.ServerException;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class StartRcpServer {
@@ -29,11 +26,12 @@ public class StartRcpServer {
             UserDBRepository userDBRepository = new UserDBRepository(url, username, password);
             ClientTicketDBRepository clientTicketsDBRepository = new ClientTicketDBRepository(url, username, password);
             MatchDBRepository matchDBRepository = new MatchDBRepository(url, username, password);
+            HibernateMatchDBRepository hibernateMatchDBRepository = new HibernateMatchDBRepository();
             TicketDBRepository ticketDBRepository = new TicketDBRepository(url, username, password);
             ClientDBRepository clientDBRepository = new ClientDBRepository(url, username, password);
 
             // Initialize service
-            IMatchServices matchServices = new MatchServicesImpl(userDBRepository, clientTicketsDBRepository, matchDBRepository, ticketDBRepository, clientDBRepository);
+            IMatchServices matchServices = new MatchServicesImpl(userDBRepository, clientTicketsDBRepository, hibernateMatchDBRepository, ticketDBRepository, clientDBRepository);
 
             int serverPort = defaultPort;
             try {

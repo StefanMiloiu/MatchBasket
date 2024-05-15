@@ -7,17 +7,19 @@ import java.util.concurrent.Executors;
 
 public class MatchServicesImpl implements IMatchServices {
     private UserDBRepository userDBRepository;
-    private ClientTicketDBRepository clientTicketsDBRepository;
+    private     ClientTicketDBRepository clientTicketsDBRepository;
 
     private ClientDBRepository clientDBRepository;
-    private MatchDBRepository matchDBRepository;
+
+//    private MatchDBRepository matchDBRepository;
+    private HibernateMatchDBRepository matchDBRepository;
     private TicketDBRepository ticketDBRepository;
     private Map<String, List<IMatchObserver>> loggedUsers;
     private List<IMatchObserver> observers = new ArrayList<>();
 
     private int defaultThreads = 5;
 
-    public MatchServicesImpl(UserDBRepository userDBRepository, ClientTicketDBRepository clientTicketsDBRepository, MatchDBRepository matchDBRepository, TicketDBRepository ticketDBRepository, ClientDBRepository clientDBRepository) {
+    public MatchServicesImpl(UserDBRepository userDBRepository, ClientTicketDBRepository clientTicketsDBRepository, HibernateMatchDBRepository matchDBRepository, TicketDBRepository ticketDBRepository, ClientDBRepository clientDBRepository) {
         this.userDBRepository = userDBRepository;
         this.clientTicketsDBRepository = clientTicketsDBRepository;
         this.matchDBRepository = matchDBRepository;
@@ -89,7 +91,7 @@ public class MatchServicesImpl implements IMatchServices {
     }
 
     @Override
-    public Iterable<Match> findAllWithAvailableSeats() {
+    public Iterable<HibernateMatch> findAllWithAvailableSeats() {
         try {
             return matchDBRepository.findAllWithAvailableSeats();
         } catch (SQLException e) {
@@ -99,13 +101,8 @@ public class MatchServicesImpl implements IMatchServices {
     }
 
     @Override
-    public Iterable<Match> findAll() {
-        try {
-            return matchDBRepository.findAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
+    public Iterable<HibernateMatch> findAll() {
+        return matchDBRepository.findAll();
     }
 
     @Override

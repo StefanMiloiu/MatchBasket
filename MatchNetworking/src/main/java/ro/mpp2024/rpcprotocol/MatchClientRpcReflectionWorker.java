@@ -123,7 +123,7 @@ public class MatchClientRpcReflectionWorker implements Runnable, IMatchObserver 
 
     private Response handleFIND_ALL(Request request) {
         System.out.println("Find all request...");
-        Iterable<Match> allMatches = server.findAll();
+        Iterable<HibernateMatch> allMatches = server.findAll();
         return new Response.Builder().type(ResponseType.OK).data(allMatches).build();
     }
 
@@ -152,7 +152,7 @@ public class MatchClientRpcReflectionWorker implements Runnable, IMatchObserver 
     }
 
     private Response handleFIND_ALL_WITH_AVAILABLE_SEATS(Request request) {
-        Iterable<Match> allMatches = server.findAllWithAvailableSeats();
+        Iterable<HibernateMatch> allMatches = server.findAllWithAvailableSeats();
         return new Response.Builder().type(ResponseType.OK).data(allMatches).build();
     }
 

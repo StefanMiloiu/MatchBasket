@@ -2,13 +2,13 @@ package ro.mpp2024;
 
 public class DTOMatch {
 
-    private Match match;
+    private HibernateMatch match;
     private Float price; // Change this line
     private int seatsAvailable;
 
     private String matchString;
 
-    public DTOMatch(Match s, float i, int i1) {
+    public DTOMatch(HibernateMatch s, float i, int i1) {
         this.match = s;
         this.price = i; // And this line
         this.seatsAvailable = i1;
@@ -18,7 +18,7 @@ public class DTOMatch {
     public String getMatchString() {
         return this.matchString;
     }
-    public Match getMatch() {
+    public HibernateMatch getMatch() {
         return match;
     }
 

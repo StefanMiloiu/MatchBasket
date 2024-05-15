@@ -1,7 +1,6 @@
 package ro.mpp2024;
 
 
-import ro.mpp2024.Entity;
 
 import java.sql.SQLException;
 import java.util.Optional;

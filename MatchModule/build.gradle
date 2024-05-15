@@ -10,8 +10,21 @@ repositories {
 }
 
 dependencies {
+    // JUnit pentru teste
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // Dependente Hibernate
+    implementation 'org.hibernate:hibernate-core:5.6.5.Final'  // Verifică ultima versiune disponibilă pe Maven Central
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final'
+
+    // Driver de baza de date MySQL
+    runtimeOnly 'mysql:mysql-connector-java:8.0.28' // Verifică ultima versiune disponibilă
+
+    // Hibernate Validator (optional)
+    implementation 'org.hibernate.validator:hibernate-validator:7.0.1.Final'
+    implementation 'org.glassfish:jakarta.el:3.0.3'
 }
 
 test {
