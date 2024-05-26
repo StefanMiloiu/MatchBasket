@@ -5,4 +5,5 @@ include 'MatchServices'
 include 'MatchServer'
 include 'MatchNetworking'
 include 'MatchClientFX'
+include 'RestServices'
 

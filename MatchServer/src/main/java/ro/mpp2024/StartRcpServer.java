@@ -25,7 +25,7 @@ public class StartRcpServer {
             // Initialize repositories
             UserDBRepository userDBRepository = new UserDBRepository(url, username, password);
             ClientTicketDBRepository clientTicketsDBRepository = new ClientTicketDBRepository(url, username, password);
-            MatchDBRepository matchDBRepository = new MatchDBRepository(url, username, password);
+//            MatchDBRepository matchDBRepository = new MatchDBRepository(url, username, password);
             HibernateMatchDBRepository hibernateMatchDBRepository = new HibernateMatchDBRepository();
             TicketDBRepository ticketDBRepository = new TicketDBRepository(url, username, password);
             ClientDBRepository clientDBRepository = new ClientDBRepository(url, username, password);

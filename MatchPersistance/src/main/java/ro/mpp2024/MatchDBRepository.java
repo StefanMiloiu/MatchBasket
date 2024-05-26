@@ -3,24 +3,29 @@ package ro.mpp2024;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-public class MatchDBRepository implements Repository<Long, Match>{
+@Service("matchDBRepository")
+public class MatchDBRepository implements MatchDBInterface{
+    @Value("${spring.datasource.url}")
     private String url;
+
+    @Value("${spring.datasource.username}")
     private String user;
+
+    @Value("${spring.datasource.password}")
     private String password;
     private static final Logger LOGGER = LogManager.getLogger();
     //            logger.error(ex);
 
-    public MatchDBRepository(String url, String user, String password) {
+    public MatchDBRepository() {
         LOGGER.info("Intializing MatchDBRepository with url {}", url);
-        this.url = url;
-        this.user = user;
-        this.password = password;
-
         try {
             // Load the JDBC driver class
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -30,7 +35,21 @@ public class MatchDBRepository implements Repository<Long, Match>{
         }
     }
 
-    @Override
+//    public MatchDBRepository(String url, String user, String password) {
+//        LOGGER.info("Intializing MatchDBRepository with url {}", url);
+//        this.url = url;
+//        this.user = user;
+//        this.password = password;
+//
+//        try {
+//            // Load the JDBC driver class
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//            System.exit(1);
+//        }
+//    }
+
     public Optional<Match> save(Match match) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -67,7 +86,6 @@ public class MatchDBRepository implements Repository<Long, Match>{
         }
     }
 
-    @Override
     public Optional<Match> findOne(Long id) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -212,5 +230,125 @@ public class MatchDBRepository implements Repository<Long, Match>{
         }
         return matches;
     }
+
+    //remove match
+    public Match delete(Long id) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            LOGGER.traceEntry("deleting match with id {} ",id);
+            // Create a connection to the database
+            connection = DriverManager.getConnection(url, user, password);
+
+            // Create the SQL query to insert a new match into the database
+            String sql = "DELETE FROM Matches WHERE id = ?";
+
+            // Create a prepared statement with the SQL query
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameters for the prepared statement
+            preparedStatement.setLong(1, id);
+
+            // Execute the prepared statement to insert the match into the database
+            preparedStatement.executeUpdate();
+            LOGGER.trace( "Deleted match with id {}", id);
+            LOGGER.traceExit();
+        } finally {
+            // Close the prepared statement and the connection
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+        }
+        return null;
+    }
+
+//    @Override
+//    public void addMatch(Match match) throws SQLException {
+//        this.save(match);
+//    }
+//
+    public void updateMatch(Long id, Match match) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            LOGGER.traceEntry("updating match {} ",match);
+            // Create a connection to the database
+            connection = DriverManager.getConnection(url, user, password);
+
+            // Create the SQL query to insert a new match into the database
+            String sql = "UPDATE Matches SET team_a = ?, team_b = ?, match_type = ? WHERE id = ?";
+
+            // Create a prepared statement with the SQL query
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set the parameters for the prepared statement
+            preparedStatement.setString(1, match.getTeamA());
+            preparedStatement.setString(2, match.getTeamB());
+            preparedStatement.setString(3, match.getMatchType());
+            preparedStatement.setLong(4, match.getId());
+
+            // Execute the prepared statement to insert the match into the database
+            preparedStatement.executeUpdate();
+            LOGGER.trace( "Updated match {}", match);
+            LOGGER.traceExit();
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        } finally {
+            // Close the prepared statement and the connection
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    LOGGER.error(e);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    LOGGER.error(e);
+                }
+            }
+        }
+    }
+
+//    @Override
+//    public void deleteMatch(Long id) {
+//        Connection connection = null;
+//        PreparedStatement preparedStatement = null;
+//
+//        try {
+//            LOGGER.traceEntry("deleting match with id {} ",id);
+//            // Create a connection to the database
+//            connection = DriverManager.getConnection(url, user, password);
+//
+//            // Create the SQL query to insert a new match into the database
+//            String sql = "DELETE FROM Matches WHERE id = ?";
+//
+//            // Create a prepared statement with the SQL query
+//            preparedStatement = connection.prepareStatement(sql);
+//
+//            // Set the parameters for the prepared statement
+//            preparedStatement.setLong(1, id);
+//
+//            // Execute the prepared statement to insert the match into the database
+//            preparedStatement.executeUpdate();
+//            LOGGER.trace( "Deleted match with id {}", id);
+//            LOGGER.traceExit();
+//        } catch (SQLException e) {
+//            LOGGER.error(e);
+//        } finally {
+//            // Close the prepared statement and the connection
+//            if (preparedStatement != null) {
+//                try {
+//                    preparedStatement.close();
+//                } catch (SQLException e) {
+//                    LOGGER.error(e);
+//                }
+//            }
+//        }
+//    }
 
 }

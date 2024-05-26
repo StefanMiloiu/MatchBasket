@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/MatchPersistance" />
             <option value="$PROJECT_DIR$/MatchServer" />
             <option value="$PROJECT_DIR$/MatchServices" />
+            <option value="$PROJECT_DIR$/RestServices" />
           </set>
         </option>
       </GradleProjectSettings>

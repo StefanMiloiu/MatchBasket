@@ -1,6 +1,6 @@
 package ro.mpp2024;
 
-public class Match extends Entity<Long> {
+public class Match extends Entity<Long>{
 
     private Long id;
     private String teamA;
@@ -15,12 +15,20 @@ public class Match extends Entity<Long> {
         this.matchType = matchType;
     }
 
+    // Default constructor
+    public Match() {
+    }
     public Match(Long id, String teamA, String teamB, String matchType) {
         super.setId(id);
         this.id = id;
         this.teamA = teamA;
         this.teamB = teamB;
         this.matchType = matchType;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

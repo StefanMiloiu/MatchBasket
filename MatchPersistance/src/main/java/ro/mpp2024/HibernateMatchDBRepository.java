@@ -10,12 +10,12 @@ import ro.mpp2024.HibernateMatch;
 import ro.mpp2024.Match;
 import ro.mpp2024.hibernateUtils.HibernateUtils;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+
 
 public class HibernateMatchDBRepository {
     private static final Logger LOGGER = LogManager.getLogger();

@@ -29,8 +29,8 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java:8.0.28' // for MySQL, check for the latest version
 
     // Logging framework integration (optional but recommended)
-    implementation 'org.slf4j:slf4j-api:1.7.32'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.0'
+//    implementation 'org.slf4j:slf4j-api:1.7.32'
+//    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.0'
 
     // JUnit for testing
     testImplementation platform('org.junit:junit-bom:5.9.1')
